@@ -27,8 +27,10 @@ main()
   tmux set -g status-justify "left"
   tmux set -g status-style "bg=${dark_gray},fg=${white_grey}"
 
-  # status bar left/right configuration
+  # status bar left section configuration
   tmux set -g status-left-style "fg=${white_grey}"
+  #tmux set -g status-left "#S  "
+  # status bar right section configuration
   tmux set -g status-right "#[fg=colour250,bg=colour240] %H:%M #[fg=colour241,bg=colour252] #h "
 
   # status bar window section configuration
@@ -37,6 +39,7 @@ main()
   tmux setw -g window-status-format "#{?window_zoomed_flag,#[fg=${light_purple}],} #I┊#W "
   tmux setw -g window-status-current-format "#{?window_zoomed_flag,#[bg=${dark_purple}],} #I┊#W "
   tmux setw -g window-status-separator ""
+
 }
 
 # run main function
