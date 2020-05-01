@@ -4,8 +4,7 @@
 # https://jonasjacek.github.io/colors/
 # https://gist.githubusercontent.com/hoov/3147229/raw/4262e4975e322a31c83f0551238e582d6a5f3cfb/colortrans.py
 
-main()
-{
+main() {
   # set current directory variable
   current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -25,7 +24,8 @@ main()
 
   # status bar genral configuration
   tmux set -g status-justify "left"
-  tmux set -g status-style "bg=${dark_gray},fg=${white_grey}"
+  tmux set -g status-style "fg=${white_grey}"
+  tmux set-option -g status-position top
 
   # status bar left/right configuration
   tmux set -g status-left-style "fg=${white_grey}"
@@ -34,9 +34,23 @@ main()
   # status bar window section configuration
   tmux setw -g window-status-current-style "bg=${pink},fg=${white}"
   tmux setw -g window-status-last-style "bg=${gray},fg=${white_grey}"
-  tmux setw -g window-status-format "#{?window_zoomed_flag,#[fg=${light_purple}],} #I┊#W "
-  tmux setw -g window-status-current-format "#{?window_zoomed_flag,#[bg=${dark_purple}],} #I┊#W "
+  tmux setw -g window-status-format "#{?window_zoomed_flag,#[fg=${light_purple}],}  #I┊#W  "
+  tmux setw -g window-status-current-format "#{?window_zoomed_flag,#[bg=${dark_purple}],}  #I┊#W  "
   tmux setw -g window-status-separator ""
+
+  # panes
+  tmux setw -g pane-border-status top
+
+  pane_index='#P'
+  pane_title='#(sh my-hostname.sh --pane-title=#{pane_title})'
+  pane_git='#(sh ~/.bin/my-radar.sh  --pane-current-path=#{pane_current_path} --pane-active=#{pane_active})'
+  tmux setw -g pane-border-format "  ${pane_index}${pane_title} · #{pane_current_command}${pane_git} "
+  tmux set -g pane-active-border-style 'fg=colour252'
+  tmux set -g pane-border-style 'fg=colour239'
+
+  # sets style for the non-default status-lines
+  tmux set -g status 2
+  tmux set -g status-format[1] ''
 }
 
 # run main function
