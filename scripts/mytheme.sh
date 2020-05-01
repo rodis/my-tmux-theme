@@ -42,8 +42,8 @@ main() {
   tmux setw -g pane-border-status top
 
   pane_index='#P'
-  pane_title='#(sh my-hostname.sh --pane-title=#{pane_title})'
-  pane_git='#(sh ~/.bin/my-radar.sh  --pane-current-path=#{pane_current_path} --pane-active=#{pane_active})'
+  pane_title='#(sh tmux-hostname.sh --pane-title=#{pane_title})'
+  pane_git='#(sh ~/.bin/tmux-radar.sh  --pane-current-path=#{pane_current_path} --pane-active=#{pane_active})'
   tmux setw -g pane-border-format "  ${pane_index}${pane_title} · #{pane_current_command}${pane_git} "
   tmux set -g pane-active-border-style 'fg=colour252'
   tmux set -g pane-border-style 'fg=colour239'
