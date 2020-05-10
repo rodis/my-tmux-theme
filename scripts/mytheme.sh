@@ -10,11 +10,11 @@ main() {
 
   # color Pallette
   white='colour231'
-  white_grey='colour254'
+  white_gray='colour254'
   gray='colour239'
-  dark_gray='#282a36'
-  light_purple='colour141'
-  dark_purple="colour61"
+  d_gray='#282a36'
+  l_purple='colour141'
+  d_purple="colour61"
   cyan='colour117'
   green='colour84'
   orange='colour215'
@@ -24,26 +24,23 @@ main() {
 
   # status bar genral configuration
   tmux set -g status-justify "left"
-  tmux set -g status-style "fg=${white_grey}"
-  tmux set-option -g status-position top
-
+  tmux set -g status-style "fg=${white_gray}"
+  tmux set -g status-position top
   # status bar left/right configuration
-  tmux set -g status-left-style "fg=${white_grey}"
+  tmux set -g status-left-style "fg=${white_gray}"
   tmux set -g status-right "#[fg=colour250,bg=colour240] %H:%M #[fg=colour241,bg=colour252] #h "
-
   # status bar window section configuration
   tmux setw -g window-status-current-style "bg=${pink},fg=${white}"
-  tmux setw -g window-status-last-style "bg=${gray},fg=${white_grey}"
-  tmux setw -g window-status-format "#{?window_zoomed_flag,#[fg=${light_purple}],}  #I┊#W  "
-  tmux setw -g window-status-current-format "#{?window_zoomed_flag,#[bg=${dark_purple}],}  #I┊#W  "
+  tmux setw -g window-status-last-style "bg=${gray},fg=${white_gray}"
+  tmux setw -g window-status-format "#{?window_zoomed_flag,#[fg=${l_purple}],}  #I┊#W  "
+  tmux setw -g window-status-current-format "#{?window_zoomed_flag,#[bg=${d_purple}],}  #I┊#W  "
   tmux setw -g window-status-separator ""
 
   # panes
-  tmux setw -g pane-border-status top
-
-  pane_index='#P'
-  pane_title='#(sh tmux-hostname.sh --pane-title=#{pane_title})'
-  pane_git='#(sh ~/.bin/tmux-radar.sh  --pane-current-path=#{pane_current_path} --pane-active=#{pane_active})'
+  tmux setw -g pane-border-status bottom
+  pane_index="#{?pane_active,#[bg=${pink}#,fg=${white}],#[bg=${gray}#,fg=${white_gray}]} #P #[bg=default,fg=default]"
+  pane_title="#(sh tmux-hostname.sh --pane-title=#{pane_title})"
+  pane_git="#(sh ~/.bin/tmux-radar.sh  --pane-current-path=#{pane_current_path} --pane-active=#{pane_active})"
   tmux setw -g pane-border-format "  ${pane_index}${pane_title} · #{pane_current_command}${pane_git} "
   tmux set -g pane-active-border-style 'fg=colour252'
   tmux set -g pane-border-style 'fg=colour239'
